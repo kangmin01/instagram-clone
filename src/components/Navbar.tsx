@@ -13,7 +13,6 @@ import {
 import ColorButton from "./ui/ColorButton";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Avatar from "./Avatar";
-import { link } from "fs";
 
 const menu = [
   {
@@ -53,7 +52,7 @@ export default function Navbar() {
           {user && (
             <li>
               <Link href={`/user/${user.username}`}>
-                <Avatar image={user.image} />
+                <Avatar image={user.image} size="small" highlight />
               </Link>
             </li>
           )}

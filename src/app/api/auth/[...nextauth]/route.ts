@@ -24,7 +24,6 @@ const authOptions: NextAuthOptions = {
       return true;
     },
     async session({ session }) {
-      console.log("세션 : ", session);
       const user = session?.user;
       if (user) {
         session.user = {
