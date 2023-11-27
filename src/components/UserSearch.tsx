@@ -1,18 +1,20 @@
 "use client";
 
 import { ProfileUser } from "@/model/user";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useSWR from "swr";
 import GridSpinner from "./GridSpinner";
 import UserCard from "./UserCard";
+import useDebounce from "@/hooks/debounce";
 
 export default function UserSearch() {
   const [keyword, setKeyword] = useState("");
+  const debouncedKeyword = useDebounce(keyword);
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<ProfileUser[]>(`/api/search/${keyword}`);
+  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -27,7 +29,15 @@ export default function UserSearch() {
           autoFocus
           placeholder="Search for a username or name"
           value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          onChange={(e) => {
+            const inputValue = e.target.value;
+            if (/^[^a-zA-Z0-9]+$/.test(inputValue.charAt(0))) {
+              //   setKeyword("");
+              setKeyword(inputValue);
+            } else {
+              setKeyword(inputValue);
+            }
+          }}
         />
       </form>
       {error && <p>무언가가 잘못 되었음😵</p>}
