@@ -1,7 +1,6 @@
 import { ProfileUser } from "@/model/user";
 import Avatar from "./Avatar";
 import FollowButton from "./FollowButton";
-import { link } from "fs";
 
 type Props = {
   user: ProfileUser;
