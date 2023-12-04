@@ -19,6 +19,7 @@ const tabs = [
 
 export default function UserPosts({ user: { username } }: Props) {
   const [query, setQuery] = useState(tabs[0].type);
+  console.log(query);
 
   return (
     <section>
