@@ -61,8 +61,8 @@ export async function getUserForProfile(username: string) {
       `*[_type == "user" && username == "${username}"][0]{
       ...,
       "id":_id,
-      "following": count(following),
-      "followers": count(followers),
+      "following": count(following[]),
+      "followers": count(followers[]),
       "posts": count(*[_type == "post" && author->username == "${username}"])
     }`
     )
