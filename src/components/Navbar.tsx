@@ -19,16 +19,19 @@ const menu = [
     href: "/",
     icon: <HomeIcon />,
     clickedIcon: <HomeFillIcon />,
+    title: "Home",
   },
   {
     href: "/search",
     icon: <SearchIcon />,
     clickedIcon: <SearchFillIcon />,
+    title: "Search users",
   },
   {
     href: "/new",
     icon: <NewIcon />,
     clickedIcon: <NewFillIcon />,
+    title: "New post",
   },
 ];
 
@@ -39,14 +42,16 @@ export default function Navbar() {
 
   return (
     <div className="flex justify-between items-center px-6">
-      <Link href="/">
+      <Link href="/" aria-label="Home">
         <h1 className="text-3xl font-bold">Instagram</h1>
       </Link>
       <nav>
         <ul className="flex gap-4 items-center p-4">
-          {menu.map(({ href, icon, clickedIcon }) => (
+          {menu.map(({ href, icon, clickedIcon, title }) => (
             <li key={href}>
-              <Link href={href}>{pathName === href ? clickedIcon : icon}</Link>
+              <Link href={href} aria-label={title}>
+                {pathName === href ? clickedIcon : icon}
+              </Link>
             </li>
           ))}
           {user && (
